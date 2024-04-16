@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,44 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/posts',function(){
-    $posts=[
-        ["id"=>1,
-        "title"=>"clean code",
-        "content"=>"body....",
-        "author"=>"doha"],
-        ["id"=>2,
-        "title"=>"laravel",
-        "content"=>"body2....",
-        "author"=>"noha"],
-        ["id"=>3,
-        "title"=>"database",
-        "content"=>"body3....",
-        "author"=>"soha"]
-    ];
-    return view('posts.index',["posts"=>$posts]);
-})->name('posts.index');
 
-Route::get('/posts/create',function(){
-    return view('posts.create');
-})->name('posts.create');
-
-Route::post('/posts',function(){
-    return redirect()->route('posts.index');
-})->name('posts.store');
-
-Route::get('/posts/{post}',function($post){
-    return view('posts.show',['post'=>$post]);
-})->where('post','[0-9]+')->name('posts.show');
-
-Route::get('/posts/{post}/edit',function($post){
-    return view('posts.edit',['post'=>$post]);
-})->where('post','[0-9]+')->name('posts.edit');
-
-Route::patch('posts/{post}', function($post) {
-    return redirect()->route('posts.show', ['post' => $post]);
-})->where('post','[0-9]+')->name('posts.update');
-
-Route::delete('posts/{post}',function($post){
-    return redirect()->route("posts.index");
-})->where('post','[0-9]+')->name('posts.destroy');
+Route::get('/posts',[PostController::class,'index'])->name('posts.index');
+Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
+Route::post('/posts',[PostController::class,'store'])->name('posts.store');
+Route::get('/posts/{post}',[PostController::class,'show'])->where('post','[0-9]+')->name('posts.show');
+Route::get('/posts/{post}/edit',[PostController::class,'edit'])->where('post','[0-9]+')->name('posts.edit');
+Route::patch('posts/{post}',[PostController::class,'update'])->where('post','[0-9]+')->name('posts.update');
+Route::delete('posts/{post}',[PostController::class,'destroy'])->where('post','[0-9]+')->name('posts.destroy');

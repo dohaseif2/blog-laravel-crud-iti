@@ -8,25 +8,25 @@
 </head>
 <body>
     <div class="container">
-    <h1>edit post number {{$post}}</h1>
-    <form method="POST" action="{{ route('posts.update', ['post' => $post]) }}">
+    <h1>edit post number {{$post['id']}}</h1>
+    <form method="POST" action="{{ route('posts.update', ['post' => $post['id']]) }}">
         @method('PATCH')
         @csrf
         <div class="form-group">
             <label for="id">ID:</label>
-            <input type="text" id="id" name="id" class="form-control">
+            <input type="text" id="id" name="id" class="form-control" value="{{$post['id']}}" disable>
         </div>
         <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" id="title" name="title" class="form-control">
+            <input type="text" id="title" name="title" class="form-control" value="{{$post['title']}}">
         </div>
         <div class="form-group">
             <label for="content">Content:</label>
-            <textarea id="content" name="content" class="form-control"></textarea>
+            <textarea id="content" name="content" class="form-control" >{{$post['content']}}</textarea>
         </div>
         <div class="form-group">
             <label for="author">Author:</label>
-            <input type="text" id="author" name="author" class="form-control">
+            <input type="text" id="author" name="author" class="form-control" value="{{$post['author']}}">
         </div>
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>

@@ -30,7 +30,7 @@
              <form method="POST" action="{{ route('posts.destroy', ['post' => $post['id']]) }}" style="display: inline-block;">
                    @csrf
                    @method('DELETE')
-                   <a type="submit" class="btn btn-danger">Delete</a>
+                   <button type="submit" class="btn btn-danger">Delete</button>
              </form>
              <a href="{{ route('posts.show', ['post' => $post['id']]) }}" class="btn btn-primary">Show</a>
 
