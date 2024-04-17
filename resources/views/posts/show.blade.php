@@ -7,7 +7,11 @@
     <title>Posts</title>
 </head>
 <body>
-    <h1>Post number : {{$post}}</h1>
+    <ul>
+        <li>{{$post->id}}</li>
+        <li>{{$post->title}}</li>
+        <li>{{$post->body}}</li>
+    </ul>
     <a href="{{route('posts.index')}}" class="btn btn-dark">Redirect to home page</a>
 
 </body>

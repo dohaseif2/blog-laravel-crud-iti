@@ -23,7 +23,7 @@
     <tr>
         <td>{{$post['id']}}</td>
         <td>{{$post['title']}}</td>
-        <td>{{$post['content']}}</td>
+        <td>{{$post['body']}}</td>
         <td>{{$post['author']}}</td>
         <td>
              <a href="{{ route('posts.edit', ['post' => $post['id']]) }}" class="btn btn-success">Update</a>

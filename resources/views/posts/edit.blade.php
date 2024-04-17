@@ -21,8 +21,8 @@
             <input type="text" id="title" name="title" class="form-control" value="{{$post['title']}}">
         </div>
         <div class="form-group">
-            <label for="content">Content:</label>
-            <textarea id="content" name="content" class="form-control" >{{$post['content']}}</textarea>
+            <label for="body">Content:</label>
+            <textarea id="body" name="body" class="form-control" >{{$post['body']}}</textarea>
         </div>
         <div class="form-group">
             <label for="author">Author:</label>

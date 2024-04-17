@@ -3,48 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Post;
 class PostController extends Controller
 {
     function index(){
-        $posts=[
-            ["id"=>1,
-            "title"=>"clean code",
-            "content"=>"body....",
-            "author"=>"doha"],
-            ["id"=>2,
-            "title"=>"laravel",
-            "content"=>"body2....",
-            "author"=>"noha"],
-            ["id"=>3,
-            "title"=>"database",
-            "content"=>"body3....",
-            "author"=>"soha"]
-        ];
+        $posts=Post::all();
         return view('posts.index',["posts"=>$posts]);
     }
     function create(){
         return view('posts.create');
     }
-    function store($request){
+    function store(Request $request){
+        $post= new Post();
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->author=$request->author;
+        $post->save();
         return redirect()->route('posts.index');
     }
     function show($post){
+        $post=Post::find($post);
         return view('posts.show',['post'=>$post]);
     }
     function edit($post){
-        $post=[
-            'id'=>$post,
-            'title'=>'clean code',
-            'author'=>'doha',
-            'content'=>'hello world',
-        ];
+        $post=Post::find($post);
         return view('posts.edit',['post'=>$post]);
     }
     function update(Request $request,$post){
+        $post=Post::find($post);
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->author= $request->author;
+        $post->save();
         return redirect()->route('posts.show', ['post' => $post]);
     }
     function destroy($post){
-        return 'deleted';
+        $post=Post::find($post);
+        $post->delete();
+        return redirect()->route('posts.index');
     }
 }
