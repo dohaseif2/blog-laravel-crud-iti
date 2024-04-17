@@ -24,7 +24,7 @@
         <td>{{$post['id']}}</td>
         <td>{{$post['title']}}</td>
         <td>{{$post['body']}}</td>
-        <td>{{$post['author']}}</td>
+        <td>{{$post->user->name}}</td>
         <td>
              <a href="{{ route('posts.edit', ['post' => $post['id']]) }}" class="btn btn-success">Update</a>
              <form method="POST" action="{{ route('posts.destroy', ['post' => $post['id']]) }}" style="display: inline-block;">
@@ -39,6 +39,7 @@
     @endforeach
 </ul>
 </table>
+{{$posts->links()}}
 </div>
 </body>
 </html>

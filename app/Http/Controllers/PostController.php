@@ -7,7 +7,7 @@ use App\Models\Post;
 class PostController extends Controller
 {
     function index(){
-        $posts=Post::all();
+        $posts=Post::paginate(2);
         return view('posts.index',["posts"=>$posts]);
     }
     function create(){
@@ -17,7 +17,7 @@ class PostController extends Controller
         $post= new Post();
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->author=$request->author;
+        $post->user_id = $request->author;
         $post->save();
         return redirect()->route('posts.index');
     }
@@ -33,7 +33,7 @@ class PostController extends Controller
         $post=Post::find($post);
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->author= $request->author;
+        $post->user_id = $request->author;
         $post->save();
         return redirect()->route('posts.show', ['post' => $post]);
     }
