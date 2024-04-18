@@ -27,3 +27,6 @@ Route::patch('posts/{post}',[PostController::class,'update'])->where('post','[0-
 Route::delete('posts/{post}',[PostController::class,'destroy'])->where('post','[0-9]+')->name('posts.destroy');*/
 
 Route::resource('posts',PostController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

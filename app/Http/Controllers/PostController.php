@@ -7,6 +7,10 @@ use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     function index(){
         $posts=Post::paginate(2);
         return view('posts.index',["posts"=>$posts]);
