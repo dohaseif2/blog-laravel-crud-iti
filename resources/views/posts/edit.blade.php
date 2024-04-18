@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
             <label for="author">Author:</label>
-            <input type="text" id="author" name="author" class="form-control" value="{{$post['author']}}">
+            <input type="text" id="author" name="author" class="form-control" value="{{$post->user->id}}">
             @error('author')
             <div class="text-danger">{{ $message }}</div>
             @enderror
