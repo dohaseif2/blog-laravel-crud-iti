@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Http\Requests\StorePostRequest;
 class PostController extends Controller
 {
     function index(){
@@ -13,7 +14,7 @@ class PostController extends Controller
     function create(){
         return view('posts.create');
     }
-    function store(Request $request){
+    function store(StorePostRequest $request){
         $post= new Post();
         $post->title = $request->title;
         $post->body = $request->body;
@@ -29,7 +30,7 @@ class PostController extends Controller
         $post=Post::find($post);
         return view('posts.edit',['post'=>$post]);
     }
-    function update(Request $request,$post){
+    function update(StorePostRequest $request,$post){
         $post=Post::find($post);
         $post->title = $request->title;
         $post->body = $request->body;
