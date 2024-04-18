@@ -19,10 +19,17 @@ class PostController extends Controller
         return view('posts.create');
     }
     function store(StorePostRequest $request){
+        $file = $request->file('avatar');
+        $extension = $file->getClientOriginalExtension();
+        $name = time().".".$extension;
+        $file->move('uploads/posts',$name);
+
         $post= new Post();
         $post->title = $request->title;
         $post->body = $request->body;
         $post->user_id = $request->author;
+        $post->avatar=$name;
+
         $post->save();
         return redirect()->route('posts.index');
     }
@@ -35,10 +42,16 @@ class PostController extends Controller
         return view('posts.edit',['post'=>$post]);
     }
     function update(StorePostRequest $request,$post){
+        $file = $request->file('avatar');
+        $extension = $file->getClientOriginalExtension();
+        $name = time().".".$extension;
+        $file->move('uploads/posts',$name);
+
         $post=Post::find($post);
         $post->title = $request->title;
         $post->body = $request->body;
         $post->user_id = $request->author;
+        $post->avatar=$name;
         $post->save();
         return redirect()->route('posts.show', ['post' => $post]);
     }

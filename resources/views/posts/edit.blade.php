@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
     <h1>edit post number {{$post['id']}}</h1>
-    <form method="POST" action="{{ route('posts.update', ['post' => $post['id']]) }}">
+    <form method="POST" action="{{ route('posts.update', ['post' => $post['id']]) }}" enctype='multipart/form-data'>
         @method('PATCH')
         @csrf
         
@@ -27,6 +27,14 @@
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
+        <div class="form-group">
+            <label for="avatar">Avatar:</label>
+            <input type="file" id="avatar" name="avatar" class="form-control" value="">
+            @error('avatar')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>
     </div>

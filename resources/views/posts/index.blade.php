@@ -8,6 +8,7 @@
         <th>title</th>
         <th>content</th>
         <th>author</th>
+        <th>avatar</th>
         <th>Action</th>
     </tr>
     @foreach($posts as $post)
@@ -16,6 +17,7 @@
         <td>{{$post['title']}}</td>
         <td>{{$post['body']}}</td>
         <td>{{$post->user->name}}</td>
+        <th><img width="50px"  src="{{ asset('uploads/posts/'. $post->avatar) }}"></img></th>
         <td>
              <a href="{{ route('posts.edit', ['post' => $post['id']]) }}" class="btn btn-success">Update</a>
              <form method="POST" action="{{ route('posts.destroy', ['post' => $post['id']]) }}" style="display: inline-block;">
