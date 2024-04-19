@@ -10,7 +10,7 @@
         <th>author</th>
         <th>avatar</th>
         <th>slug</th>
-        <th>Action</th>
+        <th colspan="3">Action</th>
     </tr>
     @foreach($posts as $post)
     <tr>
@@ -22,12 +22,19 @@
         <td>{{$post['slug']}}</td>
         <td>
              <a href="{{ route('posts.edit', ['post' => $post['id']]) }}" class="btn btn-success">Update</a>
+        </td> 
+        <td>
              <form method="POST" action="{{ route('posts.destroy', ['post' => $post['id']]) }}" style="display: inline-block;">
                    @csrf
                    @method('DELETE')
                    <button type="submit" class="btn btn-danger">Delete</button>
              </form>
+        </td>
+        <td>
              <a href="{{ route('posts.show', ['post' => $post['id']]) }}" class="btn btn-primary">Show</a>
+        </td>
+        <td>
+             <a href="{{route('comments.create',['post'=>$post['id']])}}" type="submit" class="btn btn-dark" >Comment</a>
 
         </td>
     </tr>

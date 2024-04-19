@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Comment;
+
 use App\Http\Requests\StorePostRequest;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -17,9 +19,10 @@ class PostController extends Controller
         $posts=Post::paginate(2);
         return view('posts.index',["posts"=>$posts]);
     }
-    function create(){
-        return view('posts.create');
-    }
+    public function create($postId)
+{
+    return view('comments.create', ['postId' => $postId]);
+}
     function store(StorePostRequest $request){
         $file = $request->file('avatar');
         $extension = $file->getClientOriginalExtension();
@@ -34,9 +37,10 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('posts.index');
     }
-    function show($post){
-        $post=Post::find($post);
-        return view('posts.show',['post'=>$post]);
+    function show($postId){
+        $post=Post::find($postId);
+        $comments = Comment::where('post_id', $postId)->get();
+        return view('posts.show',['post'=>$post,'comments'=>$comments]);
     }
     function edit($post){
         $post=Post::find($post);

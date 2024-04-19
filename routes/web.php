@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,7 @@ Route::resource('posts',PostController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('comments',CommentController::class);
+Route::get('comments/create/{post}', [CommentController::class,'create'])->name('comments.create');
+
+
