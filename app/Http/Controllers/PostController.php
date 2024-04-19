@@ -8,6 +8,7 @@ use App\Models\Comment;
 
 use App\Http\Requests\StorePostRequest;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -60,8 +61,14 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('posts.show', ['post' => $post]);
     }
-    function destroy($post){
-        $post=Post::find($post);
+    function destroy($id){
+        $post=Post::find($id);
+        if ($post->avatar) {
+            $oldAvatarPath = public_path('uploads/posts/') . $post->avatar;
+            if (File::exists($oldAvatarPath)) {
+                File::delete($oldAvatarPath);
+            }
+        }
         $post->delete();
         return redirect()->route('posts.index');
     }
