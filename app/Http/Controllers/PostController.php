@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
+
 class PostController extends Controller
 {
     public function __construct()
@@ -29,7 +31,6 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->user_id = $request->author;
         $post->avatar=$name;
-
         $post->save();
         return redirect()->route('posts.index');
     }
