@@ -25,16 +25,20 @@ class PostController extends Controller
     return view('posts.create');
 }
     function store(StorePostRequest $request){
-        $file = $request->file('avatar');
-        $extension = $file->getClientOriginalExtension();
-        $name = time().".".$extension;
-        $file->move('uploads/posts',$name);
+       
 
         $post= new Post();
+        if($request->hasFile('avatar')){
+            $file = $request->file('avatar');
+            $extension = $file->getClientOriginalExtension();
+            $name = time().".".$extension;
+            $file->move('uploads/posts',$name);
+            $post->avatar=$name;
+        }
         $post->title = $request->title;
         $post->body = $request->body;
         $post->user_id = $request->author;
-        $post->avatar=$name;
+        
         $post->save();
         return redirect()->route('posts.index');
     }
