@@ -19,11 +19,7 @@
             @enderror
         </div>
         <div class="form-group">
-            <label for="author">Author:</label>
-            <input type="text" id="author" name="author" class="form-control">
-            @error('author')
-            <div class="text-danger">{{ $message }}</div>
-            @enderror
+            <input type="text" id="author" name="author" hidden class="form-control" value="{{ Auth::user()->id }}">
         </div>
         <div class="form-group">
             <label for="author">Avatar:</label>

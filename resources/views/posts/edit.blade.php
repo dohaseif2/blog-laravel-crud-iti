@@ -29,7 +29,12 @@
         </div>
         <div class="form-group">
             <label for="avatar">Avatar:</label>
-            <input type="file" id="avatar" name="avatar" class="form-control" value="">
+            <input type="file" id="avatar" name="avatar" class="form-control" value="{{ asset('uploads/posts/' . $post->avatar) }}">
+           
+            @if ($post->avatar)
+            <img src="{{ asset('uploads/posts/' . $post->avatar) }}" alt="Avatar" style="max-width: 100px;">
+            @endif
+           
             @error('avatar')
             <div class="text-danger">{{ $message }}</div>
             @enderror

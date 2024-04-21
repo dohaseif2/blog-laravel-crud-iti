@@ -29,8 +29,8 @@ class StorePostRequest extends FormRequest
                 'min:3',
             ],
             'body' => 'required|min:10',
-            'author' => 'required|exists:users,id',
-            'avatar'=>'required|mimes:png,jpg',
+            'author' => 'exists:users,id',
+            'avatar'=>'mimes:png,jpg',
         ];
     }
     public function messages(): array
