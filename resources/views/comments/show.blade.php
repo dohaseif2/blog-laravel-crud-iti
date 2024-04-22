@@ -8,5 +8,5 @@
     </ul>
 
        
-    <a href="{{route('posts.index')}}" class="btn btn-dark">Redirect to home page</a>
+    <a href="{{route('posts.show',['post'=>$comment->post_id])}}" class="btn btn-dark">Redirect to post</a>
 @endsection
