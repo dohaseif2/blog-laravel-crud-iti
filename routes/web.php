@@ -32,8 +32,18 @@ Route::delete('posts/{post}',[PostController::class,'destroy'])->where('post','[
 
 Route::resource('posts',PostController::class);
 Auth::routes();
-
+Route::get('/',function (){
+return "done";
+});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('comments',CommentController::class);
 Route::get('comments/create/{post}', [CommentController::class,'create'])->name('comments.create');
 
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+});
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('github')->user();
+    dd($user);
+ });
