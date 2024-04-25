@@ -9,7 +9,7 @@
         <li><img width="50" src="{{asset('uploads/posts/'.$post->avatar)}}"></li>
     </ul>
     @if($comments->isNotEmpty())
-    <h3>Comments:</h3>
+    <h3> Comments ( {{ $comments->count() }} {{ Str::plural('comment', $comments->count()) }} ) </h3>
     <div class="w-50">
     <table class="table">
     <tr>

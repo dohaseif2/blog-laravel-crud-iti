@@ -2,7 +2,16 @@
 @section('content')
 <div class="container">
     <a href="{{route('posts.create')}}" type="submit" class="btn btn-primary" >Create new post</a>
-<table class="table">
+<div class="row">
+        <div class="col">
+           <p class="fs-4">
+           Number of posts: {{ $posts->count() }} {{ Str::plural('post', $posts->count()) }}
+
+           </p>
+           
+        </div>
+    </div>
+    <table class="table">
     <tr>
         <th>id</th>
         <th>title</th>
@@ -39,8 +48,11 @@
         </td>
     </tr>
     @endforeach
-</ul>
+
 </table>
 {{$posts->links()}}
+
 </div>
+
+
 @endsection
