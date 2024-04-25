@@ -5,7 +5,7 @@
 <div class="row">
         <div class="col">
            <p class="fs-4">
-           Number of posts: {{ $posts->total() }} {{ Str::plural('post', $posts->total()) }}
+           Number of posts: {{ $posts->count() }} {{ Str::plural('post', $posts->count()) }}
 
            </p>
            

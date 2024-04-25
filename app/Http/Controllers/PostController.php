@@ -44,7 +44,8 @@ class PostController extends Controller
     }
     function show($postId){
         $post=Post::find($postId);
-        return view('posts.show',['post'=>$post]);
+        $comments = Comment::where('post_id', $postId)->get();
+        return view('posts.show',['post'=>$post,'comments'=>$comments]);
     }
     function edit($post){
         $post=Post::find($post);
