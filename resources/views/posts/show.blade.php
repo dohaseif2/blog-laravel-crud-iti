@@ -8,25 +8,25 @@
         <li>{{$post->user->name}}</li>
         <li><img width="50" src="{{asset('uploads/posts/'.$post->avatar)}}"></li>
     </ul>
-    @if($comments->isNotEmpty())
-    <h3> Comments ( {{ $comments->count() }} {{ Str::plural('comment', $comments->count()) }} ) </h3>
+    @if($post->comments->isNotEmpty())
+    <h3> Comments ( {{ $post->comments->count() }} {{ Str::plural('comment', $comments->count()) }} ) </h3>
     <div class="w-50">
     <table class="table">
     <tr>
         <th></th>
         <th></th>
     </tr>
-        @foreach($comments as $comment)
+        @foreach($post->comments as $post->comments)
         <tr>
-            <td>{{$comment->user->name}} : {{$comment->body}}</td>
-            <td><form method="POST" action="{{ route('comments.destroy', ['comment' => $comment['id']]) }}" style="display: inline-block;">
+            <td>{{$post->comments->user->name}} : {{$post->comments->body}}</td>
+            <td><form method="POST" action="{{ route('comments.destroy', ['comment' => $post->comments['id']]) }}" style="display: inline-block;">
                    @csrf
                    @method('DELETE')
                    <button type="submit" class="btn btn-danger">Delete</button>
              </form>
              
-             <a href="{{ route('comments.edit', ['comment' => $comment['id']]) }}" class="btn btn-success">Update</a>
-             <a href="{{ route('comments.show', ['comment' => $comment['id']]) }}" class="btn btn-primary">Show</a>
+             <a href="{{ route('comments.edit', ['comment' => $post->comments['id']]) }}" class="btn btn-success">Update</a>
+             <a href="{{ route('comments.show', ['comment' => $post->comments['id']]) }}" class="btn btn-primary">Show</a>
              </td>
              </tr>
         @endforeach
