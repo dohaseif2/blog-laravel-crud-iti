@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\authenticationController;
 use App\Http\Controllers\api\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,32 +27,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('/posts',[PostController::class,'index'])->name('posts.index');
-// Route::post('/posts',[PostController::class,'store'])->name('posts.store');
-// Route::get('/posts/{post}',[PostController::class,'show'])->where('post','[0-9]+')->name('posts.show');
-// Route::delete('posts/{post}',[PostController::class,'destroy'])->where('post','[0-9]+')->name('posts.destroy');
-
 Route::resource('posts',PostController::class)->middleware('auth:sanctum');
 Route::post('posts/{post}',[PostController::class,'update'])->where('post','[0-9]+')->name('posts.update');
 Route::resource('comments',CommentController::class)->middleware('auth:sanctum');
 Route::resource('users',UserController::class)->middleware('auth:sanctum');
-
-
-Route::post('/sanctum/token', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-        'device_name' => 'required',
-    ]);
- 
-    $user = User::where('email', $request->email)->first();
- 
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
- 
-    return $user->createToken($request->device_name)->plainTextToken;
-});
-
+Route::post('login',[authenticationController::class,'login']);
+Route::post('logout',[authenticationController::class,'logout'])->middleware('auth:sanctum');
